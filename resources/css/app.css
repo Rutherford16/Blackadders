@@ -7,4 +7,9 @@
         font-family: hemiHead;
         src: url('/fonts/hemi_head_bd_it.ttf');
     }
+    @font-face {
+        font-family: "podiumSharp";
+        font-style: normal;
+        src: url("/fonts/podiumsharp-3.7.otf");
+    }
 }
