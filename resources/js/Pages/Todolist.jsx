@@ -3,7 +3,7 @@ import Modal from '@/Components/Modal';
 import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
 import InputError from '@/Components/InputError';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
 export default function Todolist({ auth, todolist }) {
@@ -18,6 +18,7 @@ export default function Todolist({ auth, todolist }) {
         deadline: '',
         bukti: null,
         id: '',
+        percentage: null,
     });
     const openDialog = () => {
         setDialogTambahTugas(true);
@@ -102,7 +103,7 @@ export default function Todolist({ auth, todolist }) {
                                     </tr>
                                 </thead>
                                 <tbody className='bg-gray-500 text-white'>
-                                    {todolist.map(list =>
+                                    {todolist.data.map(list =>
                                         <tr key={list.id} className='odd:bg-gray-600'>
                                             <td className="border border-gray-800 p-2">{list.name}</td>
                                             <td className="border border-gray-800 p-2">{list.deadline}</td>
@@ -118,6 +119,18 @@ export default function Todolist({ auth, todolist }) {
                                         </tr>)}
                                 </tbody>
                             </table>
+                        </div>
+                        <div className='flex justify-end gap-1 pe-4 pb-4 text-white'>
+                            {todolist.links.map((link, key) =>
+                                <div key={key}>
+                                    {link.active ?
+                                        (<span className='p-2 bg-white text-black rounded-sm cursor-default'>{link.label}</span>)
+                                        :
+                                        (<a href={link.url} className='px-2 py-1 bg-gray-500 hover:bg-gray-400 rounded-sm'>{link.label}</a>)
+                                    }
+                                </div>
+                            )
+                            }
                         </div>
                     </div>
                 </div>
@@ -178,7 +191,7 @@ export default function Todolist({ auth, todolist }) {
                         />
                         {data.bukti && <img src={preview} />}
                         {progress && (
-                            <progress value={progress.percentage} max="100">
+                            <progress value={progress.percentage} max="100" className='w-full text-white'>
                                 {progress.percentage}%
                             </progress>
                         )}

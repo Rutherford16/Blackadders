@@ -19,7 +19,8 @@ class ToDoListController extends Controller
         ->orderBy("is_complete")
         ->orderBy("deadline")
         ->orderBy("updated_at", "asc")
-        ->get();
+        ->paginate(5);
+        Log::info($sort);
 
         return Inertia::render(
             'Todolist',
