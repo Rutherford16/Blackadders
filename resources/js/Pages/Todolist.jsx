@@ -4,7 +4,7 @@ import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
 import InputError from '@/Components/InputError';
 import { Head, useForm } from '@inertiajs/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Todolist({ auth, todolist }) {
     const [dialogTambahTugas, setDialogTambahTugas] = useState(false);
@@ -12,7 +12,8 @@ export default function Todolist({ auth, todolist }) {
     const [uploadBukti, setUploadBukti] = useState(false);
     const [id, setId] = useState();
     const [filename, setFileName] = useState();
-    const { data, setData, post, processing, errors, progress } = useForm({
+    const [preview, setPreview] = useState();
+    const { data, setData, post, processing, errors, progress, reset } = useForm({
         name: '',
         deadline: '',
         bukti: null,
@@ -37,6 +38,7 @@ export default function Todolist({ auth, todolist }) {
         setUploadBukti(true);
     };
     const closeDialogUploadBukti = () => {
+        setData('bukti', undefined)
         setUploadBukti(false);
     };
     const tambahTugas = (e) => {
@@ -53,14 +55,33 @@ export default function Todolist({ auth, todolist }) {
                 onSuccess: () => closeDialogUploadBukti()
             });
     };
+    // create a preview as a side effect, whenever selected file is changed
+    useEffect(() => {
+        if (!data.bukti) {
+            setPreview(undefined)
+            return
+        }
+
+        const objectUrl = URL.createObjectURL(data.bukti)
+        setPreview(objectUrl)
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [data.bukti])
+
+    const onSelectFile = e => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setData('bukti', undefined)
+            return
+        }
+        setData('bukti', e.target.files[0])
+    }
 
     return (
         <AuthenticatedLayout
             user={auth.user}
         >
             <Head title="To Do List" />
-            {/* {console.log(new Date().toLocaleString('en-US', { timeZone: 'Asia/Makassar' }))}
-            {console.log(new Date(new Date().getTime()+(3600000*8)).toISOString())} */}
 
             <div className="py-8">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -141,7 +162,7 @@ export default function Todolist({ auth, todolist }) {
             </Modal>
             <Modal show={dialogBuktiSelesai} onClose={closeDialogBukti} maxWidth={'5xl'}>
                 <div className='flex justify-center bg-gray-700 p-4'>
-                    <img src={"/storage/image/"+filename} className='' alt="cobaaaa" />
+                    <img src={"/storage/image/" + filename} className='' alt="cobaaaa" />
                 </div>
             </Modal>
             <Modal show={uploadBukti} onClose={closeDialogUploadBukti}>
@@ -153,8 +174,9 @@ export default function Todolist({ auth, todolist }) {
                             name="bukti"
                             type="file"
                             className="my-1 bg-gray-50 block w-full"
-                            onChange={e => setData('bukti', e.target.files[0])}
+                            onChange={onSelectFile}
                         />
+                        {data.bukti && <img src={preview} />}
                         {progress && (
                             <progress value={progress.percentage} max="100">
                                 {progress.percentage}%
