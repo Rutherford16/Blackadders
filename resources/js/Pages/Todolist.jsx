@@ -140,7 +140,7 @@ export default function Todolist({ auth, todolist }) {
                 </form>
             </Modal>
             <Modal show={dialogBuktiSelesai} onClose={closeDialogBukti} maxWidth={'5xl'}>
-                <div className='bg-gray-700 p-4'>
+                <div className='flex justify-center bg-gray-700 p-4'>
                     <img src={"/storage/image/"+filename} className='' alt="cobaaaa" />
                 </div>
             </Modal>
