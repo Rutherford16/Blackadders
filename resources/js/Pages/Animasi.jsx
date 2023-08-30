@@ -1,12 +1,15 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Modal from '@/Components/Modal';
 import Marlboro from '@/Components/Animasi/Marlboro';
+import Bankaltimtara from '@/Components/Animasi/Bankaltimtara';
+import SedayuDharmaGroup from '@/Components/Animasi/SedayuDharmaGroup';
+import Honda from '@/Components/Animasi/Honda';
 import { Head } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function Animasi({ auth }) {
     const [dialog, setDialog] = useState(false);
-    const [NamaAnimasi, setNamaAnimasi] = useState();
+    const [NamaAnimasi, setNamaAnimasi] = useState('Marlboro');
     // const listAnimasi = {
     //     'Marlboro': <Marlboro/>,
     // }[namaAnimasi];
@@ -19,6 +22,17 @@ export default function Animasi({ auth }) {
     const closeDialog = () => {
         setDialog(false);
     };
+
+    // const components = {
+    //     photo: PhotoStory,
+    //     video: VideoStory
+    // };
+
+    // function Story(props) {
+    //     // Correct! JSX type can be a capitalized variable.
+    //     const SpecificStory = components[props.storyType];
+    //     return <SpecificStory story={props.story} />;
+    // }
 
     return (
         <AuthenticatedLayout
@@ -34,15 +48,25 @@ export default function Animasi({ auth }) {
                         </div>
                         <div className='flex gap-3 m-3 p-2 text-white'>
                             <button onClick={(e) => openDialog(e.target.value)} className='bg-gray-500 hover:bg-gray-400 p-3 rounded' value='Marlboro'>Marlboro</button>
-                            <button onClick={(e) => openDialog(e.target.value)} className='bg-gray-500 hover:bg-gray-400 p-3 rounded' value='bankaltimtara'>bankaltimtara</button>
+                            <button onClick={(e) => openDialog(e.target.value)} className='bg-gray-500 hover:bg-gray-400 p-3 rounded' value='Bankaltimtara'>Bankaltimtara</button>
+                            <button onClick={(e) => openDialog(e.target.value)} className='bg-gray-500 hover:bg-gray-400 p-3 rounded' value='SedayuDharmaGroup'>Sedayu Dharma Group</button>
+                            <button onClick={(e) => openDialog(e.target.value)} className='bg-gray-500 hover:bg-gray-400 p-3 rounded' value='Honda'>Honda</button>
                         </div>
                     </div>
                 </div>
             </div>
             <Modal show={dialog} onClose={closeDialog} maxWidth={'5xl'}>
-                <h1 className='text-white text-3xl m-2 p-3 bg-gray-700 rounded'>{NamaAnimasi}</h1>
+                <div className='text-white text-3xl m-2 p-3 bg-gray-700 rounded flex'>
+                    <h1 className='grow'>{NamaAnimasi}</h1>
+                    <div className=''>
+                        <button className='bg-gray-500 hover:bg-gray-600 px-2 rounded' onClick={closeDialog}>X</button>
+                    </div>
+                </div>
                 <div className='flex justify-center m-5'>
-                    <Marlboro />
+                    {NamaAnimasi === 'Marlboro' && (<Marlboro />)}
+                    {NamaAnimasi === 'Bankaltimtara' && (<Bankaltimtara />)}
+                    {NamaAnimasi === 'SedayuDharmaGroup' && (<SedayuDharmaGroup />)}
+                    {NamaAnimasi === 'Honda' && (<Honda />)}
                 </div>
             </Modal >
         </AuthenticatedLayout >

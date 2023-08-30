@@ -1,10 +1,10 @@
 import { useRef, useEffect } from 'react';
 import anime from 'animejs';
 
-export default function Animasi({ auth }) {
+export default function Animasi() {
     const animationRef = useRef(null);
 
-    const animasiMarlboro = () => {
+    const animasi = () => {
         animationRef.current =
             anime.timeline({
                 easing: 'easeInOutExpo',
@@ -49,14 +49,14 @@ export default function Animasi({ auth }) {
     }
 
     useEffect(() => {
-        animasiMarlboro();
+        animasi();
     }, []);
 
     return (
 
         <div id="box" className='flex justify-center w-fit p-5 bg-white'>
             <svg viewBox="0 0 64 96" className='h-96 font-podiumSharp'>
-                <rect width="64" height="96" fill="#193f4a"></rect>
+                <rect width="64" height="96" fill="#193f5c"></rect>
 
                 <g id="kiriDaun">
                     <line x1="5" y1="5.5" x2="27" y2="5.5" style={{ stroke: '#fff', strokeWidth: '.2' }} />
