@@ -12,4 +12,7 @@
         font-style: normal;
         src: url("/fonts/podiumsharp-3.7.otf");
     }
+    .reset-tailwind *{
+        all: revert;
+    }
 }

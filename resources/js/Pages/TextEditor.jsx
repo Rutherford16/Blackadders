@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 
-export default function Animasi({ auth }) {
+export default function TextEditor({ auth }) {
     const [text, setText] = useState('');
     marked.use({
         async: false,
@@ -46,8 +46,7 @@ export default function Animasi({ auth }) {
                     <div className='flex gap-2 p-4 text-black'>
                         <textarea name="" id="editor" className='w-1/2 h-96 rounded-sm' onChange={(e) => setText(e.target.value)} autoFocus></textarea>
                         <div id='preview' className='w-1/2 max-h-96 overflow-auto bg-white rounded-sm p-2'>
-                            {/* Tailwind nya ga bisa di non aktifkan */}
-                            <div style={{ all: 'revert' }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked.parse(text)) }}></div>
+                            <div className='reset-tailwind' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked.parse(text)) }}></div>
                         </div>
                     </div>
                 </div>
