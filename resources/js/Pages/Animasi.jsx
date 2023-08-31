@@ -49,8 +49,8 @@ export default function Animasi({ auth }) {
                         <div className='flex gap-3 m-3 p-2 text-white'>
                             <button onClick={(e) => openDialog(e.target.value)} className='bg-gray-500 hover:bg-gray-400 p-3 rounded' value='Marlboro'>Marlboro</button>
                             <button onClick={(e) => openDialog(e.target.value)} className='bg-gray-500 hover:bg-gray-400 p-3 rounded' value='Bankaltimtara'>Bankaltimtara</button>
-                            <button onClick={(e) => openDialog(e.target.value)} className='bg-gray-500 hover:bg-gray-400 p-3 rounded' value='SedayuDharmaGroup'>Sedayu Dharma Group</button>
-                            <button onClick={(e) => openDialog(e.target.value)} className='bg-gray-500 hover:bg-gray-400 p-3 rounded' value='Honda'>Honda</button>
+                            <button onClick={(e) => openDialog(e.target.value)} className='bg-gray-500 hover:bg-gray-400 p-3 rounded' value='SedayuDharmaGroup(Unfinished)'>Sedayu Dharma Group</button>
+                            <button onClick={(e) => openDialog(e.target.value)} className='bg-gray-500 hover:bg-gray-400 p-3 rounded' value='Honda(Unfinished)'>Honda</button>
                         </div>
                     </div>
                 </div>
@@ -65,8 +65,8 @@ export default function Animasi({ auth }) {
                 <div className='flex justify-center m-5'>
                     {NamaAnimasi === 'Marlboro' && (<Marlboro />)}
                     {NamaAnimasi === 'Bankaltimtara' && (<Bankaltimtara />)}
-                    {NamaAnimasi === 'SedayuDharmaGroup' && (<SedayuDharmaGroup />)}
-                    {NamaAnimasi === 'Honda' && (<Honda />)}
+                    {NamaAnimasi === 'SedayuDharmaGroup(Unfinished)' && (<SedayuDharmaGroup />)}
+                    {NamaAnimasi === 'Honda(Unfinished)' && (<Honda />)}
                 </div>
             </Modal >
         </AuthenticatedLayout >
