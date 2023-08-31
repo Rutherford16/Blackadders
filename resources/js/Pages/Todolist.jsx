@@ -126,7 +126,7 @@ export default function Todolist({ auth, todolist }) {
                                     {link.active ?
                                         (<span className='p-2 bg-white text-black rounded-sm cursor-default'>{link.label}</span>)
                                         :
-                                        (<a href={link.url} className='px-2 py-1 bg-gray-500 hover:bg-gray-400 rounded-sm'>{link.label}</a>)
+                                        (<a href={link.url} className='px-2 py-1 bg-gray-500 hover:bg-gray-400 rounded-sm' dangerouslySetInnerHTML={{ __html: link.label}}></a>)
                                     }
                                 </div>
                             )
