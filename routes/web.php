@@ -34,6 +34,10 @@ Route::get('/animasi', function () {
     return Inertia::render('Animasi');
 })->middleware(['auth', 'verified'])->name('animasi');
 
+Route::get('/textEditor', function () {
+    return Inertia::render('TextEditor');
+})->middleware(['auth', 'verified'])->name('textEditor');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
